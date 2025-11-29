@@ -40,7 +40,7 @@ const AssembliesPage = () => {
             </div>
 
             <div className="grid-container">
-                {recipes.length > 0 ? (
+                {recipes && recipes.length > 0 ? (
                     recipes.map(recipe => {
                         const product = getProduct(recipe.productId);
                         return (
