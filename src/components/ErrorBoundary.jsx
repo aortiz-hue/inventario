@@ -15,7 +15,13 @@ class ErrorBoundary extends React.Component {
             error: error,
             errorInfo: errorInfo
         });
-        console.error("Uncaught error:", error, errorInfo);
+        // Safe logging
+        try {
+            console.error("Uncaught error:", error);
+            console.error("Component stack:", errorInfo ? errorInfo.componentStack : 'No stack trace');
+        } catch (e) {
+            console.log("Error logging failed");
+        }
     }
 
     render() {
