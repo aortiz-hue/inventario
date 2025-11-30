@@ -40,54 +40,60 @@ const AssembliesPage = () => {
             </div>
 
             <div className="grid-container">
-                {recipes && recipes.length > 0 ? (
-                    recipes.map(recipe => {
-                        const product = getProduct(recipe.productId);
-                        return (
-                            <div key={recipe.id} className="card recipe-card">
-                                <div className="recipe-header">
-                                    <h3 className="recipe-title">{recipe.name}</h3>
-                                    <div className="recipe-actions">
-                                        <button onClick={() => handleProduce(recipe)} className="icon-btn text-success" title="Producir">
-                                            <Play size={20} />
-                                        </button>
-                                        <button onClick={() => handleDelete(recipe.id)} className="icon-btn text-danger" title="Eliminar">
-                                            <Trash2 size={20} />
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className="recipe-target">
-                                    <span className="label">Producto Final:</span>
-                                    <span className="value">{product ? product.name : 'Desconocido'}</span>
-                                </div>
-
-                                <div className="recipe-components">
-                                    <span className="label">Componentes:</span>
-                                    <ul className="component-list">
-                                        {recipe.components.map((comp, idx) => {
-                                            const compProduct = getProduct(comp.productId);
-                                            return (
-                                                <li key={idx}>
-                                                    {comp.quantity} x {compProduct ? compProduct.name : '???'}
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
+<<<<<<< HEAD
+    {
+        recipes && recipes.length > 0 ? (
+=======
+                {recipes.length > 0 ? (
+>>>>>>> 84e1bc3 (Initial commit: Inventory System with Supabase and Barcode Scanner)
+            recipes.map(recipe => {
+                const product = getProduct(recipe.productId);
+                return (
+                    <div key={recipe.id} className="card recipe-card">
+                        <div className="recipe-header">
+                            <h3 className="recipe-title">{recipe.name}</h3>
+                            <div className="recipe-actions">
+                                <button onClick={() => handleProduce(recipe)} className="icon-btn text-success" title="Producir">
+                                    <Play size={20} />
+                                </button>
+                                <button onClick={() => handleDelete(recipe.id)} className="icon-btn text-danger" title="Eliminar">
+                                    <Trash2 size={20} />
+                                </button>
                             </div>
-                        );
-                    })
-                ) : (
-                    <div className="empty-state-card">
-                        <Package size={48} className="empty-icon" />
-                        <h3>No hay recetas definidas</h3>
-                        <p>Crea una receta para definir qué componentes forman un producto final.</p>
-                    </div>
-                )}
-            </div>
+                        </div>
 
-            <style>{`
+                        <div className="recipe-target">
+                            <span className="label">Producto Final:</span>
+                            <span className="value">{product ? product.name : 'Desconocido'}</span>
+                        </div>
+
+                        <div className="recipe-components">
+                            <span className="label">Componentes:</span>
+                            <ul className="component-list">
+                                {recipe.components.map((comp, idx) => {
+                                    const compProduct = getProduct(comp.productId);
+                                    return (
+                                        <li key={idx}>
+                                            {comp.quantity} x {compProduct ? compProduct.name : '???'}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </div>
+                );
+            })
+        ) : (
+        <div className="empty-state-card">
+            <Package size={48} className="empty-icon" />
+            <h3>No hay recetas definidas</h3>
+            <p>Crea una receta para definir qué componentes forman un producto final.</p>
+        </div>
+    )
+    }
+            </div >
+
+    <style>{`
         .grid-container {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -169,7 +175,7 @@ const AssembliesPage = () => {
           opacity: 0.5;
         }
       `}</style>
-        </div>
+        </div >
     );
 };
 
