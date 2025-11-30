@@ -40,7 +40,7 @@ const AssembliesPage = () => {
             </div>
 
             <div className="grid-container">
-                {recipes && recipes.length > 0 ? (
+                {Array.isArray(recipes) && recipes.length > 0 ? (
                     recipes.map(recipe => {
                         const product = getProduct(recipe.productId);
                         return (
@@ -84,8 +84,9 @@ const AssembliesPage = () => {
                         <h3>No hay recetas definidas</h3>
                         <p>Crea una receta para definir qué componentes forman un producto final.</p>
                     </div>
-                )}
-            </div>
+                )
+                }
+            </div >
 
             <style>{`
         .grid-container {
@@ -169,7 +170,7 @@ const AssembliesPage = () => {
           opacity: 0.5;
         }
       `}</style>
-        </div>
+        </div >
     );
 };
 
