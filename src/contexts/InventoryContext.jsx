@@ -130,7 +130,8 @@ export const InventoryProvider = ({ children }) => {
         deleteProduct,
         getProduct,
         addCategory,
-        deleteCategory
+        deleteCategory,
+        refreshInventory: fetchData
     };
 
     return (

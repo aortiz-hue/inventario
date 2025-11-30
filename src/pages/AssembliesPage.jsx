@@ -30,7 +30,7 @@ const AssembliesPage = () => {
         <div className="page-container">
             <div className="page-header">
                 <div>
-                    <h1 className="page-title">Ensambles y Recetas</h1>
+                    <h1 className="page-title">Ensambles de Productos</h1>
                     <p className="page-subtitle">Define productos compuestos y gestiona producción</p>
                 </div>
                 <Link to="/assemblies/new" className="btn btn-primary">

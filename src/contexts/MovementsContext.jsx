@@ -8,7 +8,7 @@ export const useMovements = () => useContext(MovementsContext);
 
 export const MovementsProvider = ({ children }) => {
     const [movements, setMovements] = useState([]);
-    const { products } = useInventory();
+    const { products, refreshInventory } = useInventory();
 
     useEffect(() => {
         fetchMovements();
@@ -70,8 +70,9 @@ export const MovementsProvider = ({ children }) => {
             if (stockError) console.error('Error updating stock:', stockError);
         }
 
-        // Refresh movements list
+        // Refresh movements list and inventory
         await fetchMovements();
+        if (refreshInventory) await refreshInventory();
     };
 
     const value = {
