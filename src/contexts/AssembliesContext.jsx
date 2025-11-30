@@ -36,7 +36,7 @@ export const AssembliesProvider = ({ children }) => {
                 setAssemblies([]);
             } else {
                 // Format data to match existing structure
-                const formatted = data ? data.map(a => ({
+                const formatted = (Array.isArray(data) ? data : []).map(a => ({
                     id: a.id,
                     name: a.name,
                     productId: a.product_id,
@@ -46,7 +46,7 @@ export const AssembliesProvider = ({ children }) => {
                         quantity: ac.quantity,
                         productName: ac.products?.name
                     })) : []
-                })) : [];
+                }));
                 setAssemblies(formatted);
             }
         } catch (error) {

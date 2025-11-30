@@ -40,8 +40,22 @@ const AssembliesPage = () => {
             </div>
 
             <div className="grid-container">
-                {Array.isArray(recipes) && recipes.length > 0 ? (
-                    recipes.map(recipe => {
+                {(() => {
+                    console.log('Rendering AssembliesPage, recipes:', recipes);
+                    if (!recipes) return <div>Cargando recetas... (recipes is null/undefined)</div>;
+                    if (!Array.isArray(recipes)) return <div>Error: recipes is not an array</div>;
+
+                    if (recipes.length === 0) {
+                        return (
+                            <div className="empty-state-card">
+                                <Package size={48} className="empty-icon" />
+                                <h3>No hay recetas definidas</h3>
+                                <p>Crea una receta para definir qué componentes forman un producto final.</p>
+                            </div>
+                        );
+                    }
+
+                    return recipes.map(recipe => {
                         const product = getProduct(recipe.productId);
                         return (
                             <div key={recipe.id} className="card recipe-card">
@@ -78,14 +92,7 @@ const AssembliesPage = () => {
                             </div>
                         );
                     })
-                ) : (
-                    <div className="empty-state-card">
-                        <Package size={48} className="empty-icon" />
-                        <h3>No hay recetas definidas</h3>
-                        <p>Crea una receta para definir qué componentes forman un producto final.</p>
-                    </div>
-                )
-                }
+                })()}
             </div >
 
             <style>{`
