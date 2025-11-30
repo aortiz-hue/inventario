@@ -7,7 +7,7 @@ import { Save, ArrowLeft, Plus, Trash2 } from 'lucide-react';
 const AssemblyFormPage = () => {
     const navigate = useNavigate();
     const { products } = useInventory();
-    const { addRecipe } = useAssemblies();
+    const { addAssembly } = useAssemblies();
 
     const [name, setName] = useState('');
     const [targetProductId, setTargetProductId] = useState('');
@@ -43,7 +43,7 @@ const AssemblyFormPage = () => {
         }
 
         try {
-            addRecipe({
+            addAssembly({
                 name,
                 productId: targetProductId,
                 components: components.map(c => ({
