@@ -175,3 +175,4 @@ const AssembliesPage = () => {
 };
 
 export default AssembliesPage;
+
