@@ -17,9 +17,10 @@ export const AssembliesProvider = ({ children }) => {
     }, []);
 
     const fetchAssemblies = async () => {
-        const { data, error } = await supabase
-            .from('assemblies')
-            .select(`
+        try {
+            const { data, error } = await supabase
+                .from('assemblies')
+                .select(`
         *,
         products (name, sku),
         assembly_components (
@@ -28,24 +29,29 @@ export const AssembliesProvider = ({ children }) => {
           products (name, sku)
         )
       `)
-            .order('name');
+                .order('name');
 
-        if (error) {
-            console.error('Error fetching assemblies:', error);
-        } else {
-            // Format data to match existing structure
-            const formatted = data.map(a => ({
-                id: a.id,
-                name: a.name,
-                productId: a.product_id,
-                productName: a.products?.name,
-                components: a.assembly_components.map(ac => ({
-                    productId: ac.component_id,
-                    quantity: ac.quantity,
-                    productName: ac.products?.name
-                }))
-            }));
-            setAssemblies(formatted);
+            if (error) {
+                console.error('Error fetching assemblies:', error);
+                setAssemblies([]);
+            } else {
+                // Format data to match existing structure
+                const formatted = data ? data.map(a => ({
+                    id: a.id,
+                    name: a.name,
+                    productId: a.product_id,
+                    productName: a.products?.name,
+                    components: a.assembly_components ? a.assembly_components.map(ac => ({
+                        productId: ac.component_id,
+                        quantity: ac.quantity,
+                        productName: ac.products?.name
+                    })) : []
+                })) : [];
+                setAssemblies(formatted);
+            }
+        } catch (error) {
+            console.error('Error in fetchAssemblies:', error);
+            setAssemblies([]);
         }
     };
 
@@ -91,6 +97,7 @@ export const AssembliesProvider = ({ children }) => {
     const produceAssembly = async (assemblyId, quantity) => {
         const assembly = assemblies.find(a => a.id === assemblyId);
         if (!assembly) throw new Error('Ensamble no encontrado');
+        if (!addMovement) throw new Error('Sistema de movimientos no disponible');
 
         // 1. Add movement for the resulting product (IN)
         await addMovement({
