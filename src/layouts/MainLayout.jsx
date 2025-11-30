@@ -71,6 +71,7 @@ const MainLayout = ({ children }) => {
           display: flex;
           min-height: 100vh;
           background-color: var(--color-background);
+          overflow-x: hidden;
         }
 
         .mobile-header {
@@ -148,7 +149,6 @@ const MainLayout = ({ children }) => {
           flex: 1;
           margin-left: 260px;
           padding: var(--spacing-xl);
-          width: 100%;
         }
 
         .menu-btn, .close-btn {
