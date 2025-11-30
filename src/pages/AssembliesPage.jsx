@@ -5,7 +5,7 @@ import { Plus, Trash2, Play, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AssembliesPage = () => {
-    const { recipes, deleteRecipe, produceAssembly } = useAssemblies();
+    const { assemblies: recipes, deleteRecipe, produceAssembly } = useAssemblies();
     const { getProduct } = useInventory();
 
     const handleProduce = (recipe) => {
