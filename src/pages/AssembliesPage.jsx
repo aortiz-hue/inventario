@@ -5,7 +5,7 @@ import { Plus, Trash2, Play, Package } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AssembliesPage = () => {
-    const { assemblies: recipes, deleteRecipe, produceAssembly } = useAssemblies();
+    const { assemblies: recipes, deleteAssembly, produceAssembly } = useAssemblies();
     const { getProduct } = useInventory();
 
     const handleProduce = (recipe) => {
@@ -22,7 +22,7 @@ const AssembliesPage = () => {
 
     const handleDelete = (id) => {
         if (window.confirm('¿Eliminar esta receta?')) {
-            deleteRecipe(id);
+            deleteAssembly(id);
         }
     };
 
