@@ -65,7 +65,7 @@ const AssembliesPage = () => {
                                 <div className="recipe-components">
                                     <span className="label">Componentes:</span>
                                     <ul className="component-list">
-                                        {recipe.components.map((comp, idx) => {
+                                        {Array.isArray(recipe.components) && recipe.components.map((comp, idx) => {
                                             const compProduct = getProduct(comp.productId);
                                             return (
                                                 <li key={idx}>
