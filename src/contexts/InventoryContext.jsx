@@ -24,7 +24,7 @@ export const InventoryProvider = ({ children }) => {
                 .order('name');
 
             if (productsError) throw productsError;
-            setProducts(productsData);
+            setProducts(productsData || []);
 
             const { data: categoriesData, error: categoriesError } = await supabase
                 .from('categories')
@@ -32,7 +32,7 @@ export const InventoryProvider = ({ children }) => {
                 .order('name');
 
             if (categoriesError) throw categoriesError;
-            setCategories(categoriesData.map(c => c.name));
+            setCategories((categoriesData || []).map(c => c.name));
         } catch (error) {
             console.error('Error fetching inventory:', error);
         } finally {

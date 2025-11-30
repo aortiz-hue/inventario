@@ -25,9 +25,10 @@ export const MovementsProvider = ({ children }) => {
 
         if (error) {
             console.error('Error fetching movements:', error);
+            setMovements([]);
         } else {
             // Flatten structure for compatibility
-            const formatted = data.map(m => ({
+            const formatted = (data || []).map(m => ({
                 ...m,
                 productId: m.product_id,
                 productName: m.products?.name || 'Producto Eliminado',
