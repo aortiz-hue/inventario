@@ -24,7 +24,12 @@ export const InventoryProvider = ({ children }) => {
                 .order('name');
 
             if (productsError) throw productsError;
-            setProducts(productsData || []);
+            // Normalize min_stock to minStock for frontend use
+            const normalizedProducts = (productsData || []).map(p => ({
+                ...p,
+                minStock: p.min_stock
+            }));
+            setProducts(normalizedProducts);
 
             const { data: categoriesData, error: categoriesError } = await supabase
                 .from('categories')
@@ -57,7 +62,7 @@ export const InventoryProvider = ({ children }) => {
             .single();
 
         if (error) throw error;
-        setProducts(prev => [...prev, data]);
+        setProducts(prev => [...prev, { ...data, minStock: data.min_stock }]);
     };
 
     const updateProduct = async (id, updatedProduct) => {
@@ -78,7 +83,7 @@ export const InventoryProvider = ({ children }) => {
             .single();
 
         if (error) throw error;
-        setProducts(prev => prev.map(p => p.id === id ? data : p));
+        setProducts(prev => prev.map(p => p.id === id ? { ...data, minStock: data.min_stock } : p));
     };
 
     const deleteProduct = async (id) => {
