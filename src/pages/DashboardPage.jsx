@@ -236,9 +236,9 @@ const DashboardPage = () => {
           align-items: center;
           gap: var(--spacing-md);
           padding: var(--spacing-sm);
-          background-color: #fef2f2;
+          background-color: var(--color-danger-bg);
           border-radius: var(--radius-md);
-          border: 1px solid #fee2e2;
+          border: 1px solid var(--color-danger-border);
         }
 
         .alert-details {

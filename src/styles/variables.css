@@ -11,6 +11,8 @@
   --color-success: #10b981; /* Emerald 500 */
   --color-warning: #f59e0b; /* Amber 500 */
   --color-danger: #ef4444; /* Red 500 */
+  --color-danger-bg: #fef2f2; /* Red 50 */
+  --color-danger-border: #fee2e2; /* Red 100 */
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
@@ -42,5 +44,7 @@
     --color-text: #f8fafc; /* Slate 50 */
     --color-text-muted: #94a3b8; /* Slate 400 */
     --color-border: #334155; /* Slate 700 */
+    --color-danger-bg: rgba(239, 68, 68, 0.1); /* Red 500 with opacity */
+    --color-danger-border: rgba(239, 68, 68, 0.2); /* Red 500 with higher opacity */
   }
 }
