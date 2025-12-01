@@ -4,72 +4,72 @@ import { ArrowLeft, Printer } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const LowStockReport = () => {
-    const { products } = useInventory();
-    const navigate = useNavigate();
+  const { products } = useInventory();
+  const navigate = useNavigate();
 
-    const currentDate = new Date().toLocaleDateString();
+  const currentDate = new Date().toLocaleDateString();
 
-    // Filter low stock products
-    const lowStockProducts = products.filter(p => p.minStock && p.stock <= p.minStock);
+  // Filter low stock products
+  const lowStockProducts = products.filter(p => p.minStock && p.stock <= p.minStock);
 
-    return (
-        <div className="report-container">
-            <div className="no-print report-controls">
-                <button onClick={() => navigate('/reports')} className="btn">
-                    <ArrowLeft size={20} /> Volver
-                </button>
-                <button onClick={() => window.print()} className="btn btn-primary">
-                    <Printer size={20} style={{ marginRight: '8px' }} /> Imprimir
-                </button>
-            </div>
+  return (
+    <div className="report-container">
+      <div className="no-print report-controls">
+        <button onClick={() => navigate('/reports')} className="btn">
+          <ArrowLeft size={20} /> Volver
+        </button>
+        <button onClick={() => window.print()} className="btn btn-primary">
+          <Printer size={20} style={{ marginRight: '8px' }} /> Imprimir
+        </button>
+      </div>
 
-            <div className="paper">
-                <div className="report-header">
-                    <h1>Reporte de Stock Bajo</h1>
-                    <p>Fecha de emisión: {currentDate}</p>
-                    <p className="subtitle">Productos que requieren reabastecimiento inmediato</p>
-                </div>
+      <div className="paper">
+        <div className="report-header">
+          <h1>Reporte de Stock Bajo</h1>
+          <p>Fecha de emisión: {currentDate}</p>
+          <p className="subtitle">Productos que requieren reabastecimiento inmediato</p>
+        </div>
 
-                {lowStockProducts.length > 0 ? (
-                    <table className="report-table">
-                        <thead>
-                            <tr>
-                                <th>SKU</th>
-                                <th>Producto</th>
-                                <th>Proveedor/Categoría</th>
-                                <th className="text-right">Stock Actual</th>
-                                <th className="text-right">Mínimo</th>
-                                <th className="text-right">Déficit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {lowStockProducts.map(p => (
-                                <tr key={p.id}>
-                                    <td className="font-mono">{p.sku}</td>
-                                    <td>{p.name}</td>
-                                    <td>{p.category}</td>
-                                    <td className="text-right text-danger font-bold">{p.stock}</td>
-                                    <td className="text-right">{p.minStock}</td>
-                                    <td className="text-right">{(p.minStock - p.stock)}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    <div className="empty-report">
-                        <p>¡Excelente! No hay productos con stock bajo en este momento.</p>
-                    </div>
-                )}
+        {lowStockProducts.length > 0 ? (
+          <table className="report-table">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Producto</th>
+                <th>Proveedor/Categoría</th>
+                <th className="text-right">Stock Actual</th>
+                <th className="text-right">Mínimo</th>
+                <th className="text-right">Déficit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {lowStockProducts.map(p => (
+                <tr key={p.id}>
+                  <td className="font-mono">{p.sku}</td>
+                  <td>{p.name}</td>
+                  <td>{p.category}</td>
+                  <td className="text-right text-danger font-bold">{p.stock}</td>
+                  <td className="text-right">{p.minStock}</td>
+                  <td className="text-right">{(p.minStock - p.stock)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="empty-report">
+            <p>¡Excelente! No hay productos con stock bajo en este momento.</p>
+          </div>
+        )}
 
-                <div className="report-footer">
-                    <p>Fin del reporte - Total items: {lowStockProducts.length}</p>
-                </div>
-            </div>
+        <div className="report-footer">
+          <p>Fin del reporte - Total items: {lowStockProducts.length}</p>
+        </div>
+      </div>
 
-            <style>{`
+      <style>{`
         .report-container {
           padding: 2rem;
-          background-color: #f3f4f6;
+          background-color: var(--color-background);
           min-height: 100vh;
         }
 
@@ -83,7 +83,7 @@ const LowStockReport = () => {
         }
 
         .paper {
-          background: white;
+          background: var(--color-surface);
           max-width: 800px;
           margin: 0 auto;
           padding: 4rem;
@@ -93,18 +93,18 @@ const LowStockReport = () => {
         .report-header {
           text-align: center;
           margin-bottom: 3rem;
-          border-bottom: 2px solid #e5e7eb;
+          border-bottom: 2px solid var(--color-border);
           padding-bottom: 2rem;
         }
 
         .report-header h1 {
           font-size: 1.8rem;
           margin-bottom: 0.5rem;
-          color: #b91c1c; /* Red for urgency */
+          color: var(--color-danger); /* Red for urgency */
         }
 
         .subtitle {
-          color: #6b7280;
+          color: var(--color-text-muted);
         }
 
         .report-table {
@@ -115,12 +115,13 @@ const LowStockReport = () => {
 
         .report-table th, .report-table td {
           padding: 1rem;
-          border-bottom: 1px solid #e5e7eb;
+          border-bottom: 1px solid var(--color-border);
           text-align: left;
+          color: var(--color-text);
         }
 
         .report-table th {
-          background-color: #f9fafb;
+          background-color: var(--color-background);
           font-weight: 600;
           text-transform: uppercase;
           font-size: 0.8rem;
@@ -128,21 +129,22 @@ const LowStockReport = () => {
         }
 
         .text-right { text-align: right !important; }
-        .text-danger { color: #dc2626; }
+        .text-danger { color: var(--color-danger); }
         .font-bold { font-weight: 700; }
         .font-mono { font-family: monospace; }
 
         .empty-report {
           text-align: center;
           padding: 3rem;
-          background-color: #f0fdf4;
+          background-color: var(--color-surface);
+          border: 1px solid var(--color-success);
           border-radius: 0.5rem;
-          color: #166534;
+          color: var(--color-success);
         }
 
         .report-footer {
           text-align: center;
-          color: #9ca3af;
+          color: var(--color-text-muted);
           font-size: 0.8rem;
           margin-top: 4rem;
         }
@@ -150,12 +152,15 @@ const LowStockReport = () => {
         @media print {
           .no-print { display: none !important; }
           .report-container { padding: 0; background: white; }
-          .paper { box-shadow: none; padding: 0; max-width: 100%; }
+          .paper { box-shadow: none; padding: 0; max-width: 100%; color: black; }
           body { background: white; }
+          .report-table th, .report-table td { color: black; border-bottom-color: #e5e7eb; }
+          .report-header h1 { color: black; }
+          .subtitle { color: #666; }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default LowStockReport;
