@@ -16,6 +16,7 @@ import ReportsPage from './pages/ReportsPage'
 import InventoryValueReport from './pages/reports/InventoryValueReport'
 import LowStockReport from './pages/reports/LowStockReport'
 import SettingsPage from './pages/SettingsPage'
+import AboutPage from './pages/AboutPage'
 
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -46,6 +47,7 @@ function App() {
                   <Route path="/reports/low-stock" element={<LowStockReport />} />
 
                   <Route path="/settings" element={<SettingsPage />} />
+                  <Route path="/about" element={<AboutPage />} />
                 </Routes>
               </MainLayout>
             </Router>

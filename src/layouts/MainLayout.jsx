@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, History, Layers, QrCode, Menu, X, FileText, Settings } from 'lucide-react';
+import { LayoutDashboard, Package, History, Layers, QrCode, Menu, X, FileText, Settings, Info } from 'lucide-react';
+
+import accendoLogo from '../assets/accendo-logo.png';
 
 const MainLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
@@ -16,6 +18,7 @@ const MainLayout = ({ children }) => {
     { icon: QrCode, label: 'Etiquetas QR', path: '/qr-generator' },
     { icon: FileText, label: 'Reportes', path: '/reports' },
     { icon: Settings, label: 'Configuración', path: '/settings' },
+    { icon: Info, label: 'Acerca de...', path: '/about' },
   ];
 
   return (
@@ -25,13 +28,17 @@ const MainLayout = ({ children }) => {
         <button className="menu-btn" onClick={toggleSidebar}>
           <Menu size={24} />
         </button>
-        <span className="logo">Sistema de Inventarios</span>
+        <a href="https://www.accendoindustry.com/" target="_blank" rel="noopener noreferrer" className="logo-link">
+          <img src={accendoLogo} alt="Accendo Industry" className="logo-img" />
+        </a>
       </header>
 
       {/* Sidebar */}
       <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
-          <span className="logo">Sistema de Inventarios</span>
+          <a href="https://www.accendoindustry.com/" target="_blank" rel="noopener noreferrer" className="logo-link">
+            <img src={accendoLogo} alt="Accendo Industry" className="logo-img" />
+          </a>
           <button className="close-btn" onClick={toggleSidebar}>
             <X size={24} />
           </button>
@@ -111,10 +118,15 @@ const MainLayout = ({ children }) => {
           border-bottom: 1px solid var(--color-border);
         }
 
-        .logo {
-          font-weight: 700;
-          font-size: 1.25rem;
-          color: var(--color-primary);
+        .logo-link {
+          display: flex;
+          align-items: center;
+        }
+
+        .logo-img {
+          height: 40px;
+          width: auto;
+          object-fit: contain;
         }
 
         .sidebar-nav {
